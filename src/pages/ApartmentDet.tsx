@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { BASE_URL } from './MakeBooking'
+import { BASE_URL } from './NewBooking'
 import {type Apartment, type Booking } from '../types/types'
 
 const ApartmentDet = () => {

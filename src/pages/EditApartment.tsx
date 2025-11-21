@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { type Apartment } from "../types/types";
-import { BASE_URL } from "./MakeBooking";
+import { BASE_URL } from "./NewBooking";
 import AptCard from "../components/AptCard";
 
 const EditApartment = () => {

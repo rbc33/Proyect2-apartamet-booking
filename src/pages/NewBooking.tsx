@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { type Apartment, type Booking } from "../types/types";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
 import AptCard from "../components/AptCard";
 
 export const BASE_URL = "http://158.179.219.166:5555"
@@ -59,7 +58,7 @@ function checkAvailability(
   });
 }
 
-const Home = () => {
+const NewBooking = () => {
   const [apartaments, setApartaments] = useState<Apartment[]>([]);
   const [bookings] = useState<unknown[]>([]);
 
@@ -174,4 +173,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default NewBooking;
