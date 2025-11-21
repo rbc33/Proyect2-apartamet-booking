@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { type Apartment, type Booking } from "./types/types";
+import { type Apartment, type Booking } from "../types/types";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import AptCard from "../components/AptCard";
 
 export const BASE_URL = "http://158.179.219.166:5555"
 
@@ -162,15 +163,13 @@ const Home = () => {
         name="guestName"
         onChange={(e) => setGuestName(e.target.value)}
       />
+      <div className="grid grid-cols-2 gap-4">
       {apartaments.map((apartment) => (
-          <div className="border-2 border-slate-600 mt-5 flex" key={apartment.id}>
-            <img src={apartment.image} alt={apartment.name} />
-            <div className="p-5">
-            <Link to={`/apartment/${apartment.id}`} ><p className="text-3xl">{apartment.name} - {apartment.pricePerDay}€/day</p></Link>
-            <p className="text-2xl">Size: {apartment.size} m² - Capacity: {apartment.capacity} guests</p>
-        <p className="text-2xl">{apartment.description}</p>
+         <AptCard key={apartment.id} id={apartment.id} name={apartment.name} description={apartment.description} size={apartment.size} capacity={apartment.capacity} pricePerDay={apartment.pricePerDay} image={apartment.image}>
+
         <button className="mt-5 bg-blue-500 text-white px-4 py-2 rounded" onClick={() => handleClick(apartment)}> Book now </button>
-        </div></div>))}
+        </AptCard>))}
+        </div>
     </div>
   );
 };
