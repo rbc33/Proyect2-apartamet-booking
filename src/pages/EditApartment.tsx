@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { type Apartment } from "../types/types";
 import { BASE_URL } from "./NewBooking";
 import AptCard from "../components/AptCard";
 
 const EditApartment = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
   const [apartment, setApartment] = useState<Apartment | undefined>();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -48,16 +49,19 @@ const EditApartment = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedApartment),
+
       });
       if (response.ok) {
         const data = await response.json();
         console.log("Apartment updated successfully:", data);
+        navigate(`/apartment/${apartment.id}`)
       } else {
         console.error("Failed to update apartment");
       }
     } catch (error) {
       console.error("Error updating apartment:", error);
     }
+    
   };
   return (
     <>

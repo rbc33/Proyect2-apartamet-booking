@@ -14,7 +14,8 @@ function formatLocalInputDate(d: Date) {
 
 async function getAvailableApartments(
   checkInDate: string,
-  checkOutDate: string
+  checkOutDate: string,
+  guests: number = 1
 ) {
   try {
     // Get all apartments and bookings
@@ -26,13 +27,15 @@ async function getAvailableApartments(
     // Filter available apartments
     const availableApartments = allApartments.filter((apartment: Apartment) => {
       // Get bookings for this specific apartment
-      const apartmentBookings: Booking[] = allBookings.filter(
+      const apartmentBookings: Booking[] = allBookings
+      .filter(
         (booking: Booking) => booking.apartmentId === apartment.id
-      );
-
+      )
       // Check availability
       return checkAvailability(checkInDate, checkOutDate, apartmentBookings);
-    });
+    })
+    // Filter by capacity
+    .filter((apartment: Apartment) => apartment.capacity >= guests);
 
     return availableApartments as Apartment[];
   } catch (error) {
@@ -74,7 +77,7 @@ const NewBooking = () => {
   const [guestName, setGuestName] = useState<string>("");
   const [hasChanged, setHasChanged] = useState<boolean>(false);
   useEffect(() => {
-    getAvailableApartments(checkIn, checkOut).then((availableApartments) => {
+    getAvailableApartments(checkIn, checkOut, guests).then((availableApartments) => {
       setApartaments(availableApartments);
     });
   }, [checkIn, checkOut, hasChanged ]);
@@ -121,12 +124,42 @@ const NewBooking = () => {
 
   return (
     <div>
-      {checkIn} - {checkOut}
+      <p className="text-3xl mt-5">Apartments available from {checkIn} to {checkOut}</p>
       <div>
-        Disponibles: {apartaments.length} — Reservas: {bookings.length}
+        Count: {apartaments.length} — Bookings: {bookings.length}
       </div>
+      <div className="flex gap-40">
+      <div className="flex flex-col items-start gap-2 my-4">
+      
+      <label htmlFor="guests">Guests:</label>
+      <input
+              className="input mx-2"
+
+        type="number"
+        id="guests"
+        value={guests}
+        name="guests"
+        min={1}
+        max={10}
+        onChange={(e) => {
+          setHasChanged(!hasChanged);
+          setGuests(Number(e.target.value))}}
+      />
+      <label htmlFor="guestName">Guest Name:</label>
+      <input
+              className="input mx-2"
+
+        type="text"
+        id="guestName"
+        value={guestName}
+        name="guestName"
+        onChange={(e) => setGuestName(e.target.value)}
+      />
+      </div>
+      <div className="flex flex-col items-start gap-2 my-4">
       <label htmlFor="checkIn">Check in:</label>
       <input
+        className="input mx-2"
         type="date"
         id="checkIn"
         value={checkIn}
@@ -135,6 +168,8 @@ const NewBooking = () => {
       />
       <label htmlFor="checkOut">Check out:</label>
       <input
+              className="input mx-2"
+
         type="date"
         id="checkOut"
         value={checkOut}
@@ -144,24 +179,8 @@ const NewBooking = () => {
           return;
         } setCheckOut(e.target.value)}}
       />
-      <label htmlFor="guests">Guests:</label>
-      <input
-        type="number"
-        id="guests"
-        value={guests}
-        name="guests"
-        min={1}
-        max={10}
-        onChange={(e) => setGuests(Number(e.target.value))}
-      />
-      <label htmlFor="guestName">Guest Name:</label>
-      <input
-        type="text"
-        id="guestName"
-        value={guestName}
-        name="guestName"
-        onChange={(e) => setGuestName(e.target.value)}
-      />
+      </div>
+      </div>
       <div className="grid grid-cols-2 gap-4">
       {apartaments.map((apartment) => (
          <AptCard key={apartment.id} id={apartment.id} name={apartment.name} description={apartment.description} size={apartment.size} capacity={apartment.capacity} pricePerDay={apartment.pricePerDay} image={apartment.image}>
