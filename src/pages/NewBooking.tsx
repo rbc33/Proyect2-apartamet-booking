@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { type Apartment, type Booking } from "../types/types";
 import toast from "react-hot-toast";
 import AptCard from "../components/AptCard";
+import DatePicker from '../components/DatePicker';
 
 export const BASE_URL = "http://158.179.219.166:5555"
 
@@ -63,24 +64,22 @@ function checkAvailability(
 
 const NewBooking = () => {
   const [apartaments, setApartaments] = useState<Apartment[]>([]);
-  const [bookings] = useState<unknown[]>([]);
 
   const now = new Date();
-  const today = formatLocalInputDate(now);
+  // const today = formatLocalInputDate(now);
   const tomorrowDate = new Date(now);
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-  const tomorrow = formatLocalInputDate(tomorrowDate);
+  // const tomorrow = formatLocalInputDate(tomorrowDate);
 
-  const [checkIn, setCheckIn] = useState<string>(today);
-  const [checkOut, setCheckOut] = useState<string>(tomorrow);
+  const [checkIn, setCheckIn] = useState<Date>(now);
+  const [checkOut, setCheckOut] = useState<Date>(tomorrowDate);
   const [guests, setGuests] = useState<number>(1);
   const [guestName, setGuestName] = useState<string>("");
-  const [hasChanged, setHasChanged] = useState<boolean>(false);
   useEffect(() => {
-    getAvailableApartments(checkIn, checkOut, guests).then((availableApartments) => {
+    getAvailableApartments(formatLocalInputDate(checkIn), formatLocalInputDate(checkOut), guests).then((availableApartments) => {
       setApartaments(availableApartments);
     });
-  }, [checkIn, checkOut, hasChanged ]);
+  }, [checkIn, checkOut, guests ]);
 
   const handleClick = async (apartment: Apartment) => {
     if (guestName === "") {
@@ -102,8 +101,8 @@ const NewBooking = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     apartmentId: apartment.id,
-                    in: checkIn,
-                    out: checkOut,
+                    in: formatLocalInputDate(checkIn),
+                    out: formatLocalInputDate(checkOut),
                     guestName: guestName,
                     guests: guests,
                 }),
@@ -118,16 +117,14 @@ const NewBooking = () => {
         } catch (err) {
             console.error("booking error", err);
         }
-        setHasChanged(!hasChanged);
     }
   };
 
   return (
     <div>
-      <p className="text-3xl mt-5">Apartments available from {checkIn} to {checkOut}</p>
-      <div>
-        Count: {apartaments.length} — Bookings: {bookings.length}
-      </div>
+      <p className="text-3xl mt-5">{apartaments.length} Apartments available.</p>
+      <br/>
+      
       <div className="flex gap-40">
       <div className="flex flex-col items-start gap-2 my-4">
       
@@ -142,7 +139,6 @@ const NewBooking = () => {
         min={1}
         max={10}
         onChange={(e) => {
-          setHasChanged(!hasChanged);
           setGuests(Number(e.target.value))}}
       />
       <label htmlFor="guestName">Guest Name:</label>
@@ -156,29 +152,19 @@ const NewBooking = () => {
         onChange={(e) => setGuestName(e.target.value)}
       />
       </div>
-      <div className="flex flex-col items-start gap-2 my-4">
-      <label htmlFor="checkIn">Check in:</label>
-      <input
-        className="input mx-2"
-        type="date"
-        id="checkIn"
-        value={checkIn}
-        name="checkIn"
-        onChange={(e) => setCheckIn(e.target.value)}
-      />
-      <label htmlFor="checkOut">Check out:</label>
-      <input
-              className="input mx-2"
+          <div className="flex flex-col">
 
-        type="date"
-        id="checkOut"
-        value={checkOut}
-        name="checkOut"
-        onChange={(e) => {if (e.target.value < checkIn) {
-          toast.error("Check out date must be after check in date");
-          return;
-        } setCheckOut(e.target.value)}}
-      />
+      <label className="text-2xl">Check in:</label>
+      <DatePicker
+      selectedDate={checkIn}
+      onDateChange={(e) =>setCheckIn(e!)}
+      
+  /></div>
+    <div className="flex flex-col">
+      <label className="text-2xl">Check out:</label>
+      <DatePicker
+      selectedDate={checkOut}
+      onDateChange={(e) =>setCheckOut(e!)} />
       </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
