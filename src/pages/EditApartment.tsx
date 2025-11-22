@@ -67,7 +67,7 @@ const EditApartment = () => {
     <>
       {apartment && (
         <div className="flex gap-40">
-          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-5 w-80" onSubmit={handleSubmit}>
             <div className="flex flex-col items-start  gap-2">
               <label htmlFor="name">Name:</label>
               <input
@@ -82,7 +82,7 @@ const EditApartment = () => {
             <div className="flex flex-col items-start  gap-2">
               <label htmlFor="description">Description:</label>
               <textarea
-                className="textarea"
+                className="textarea overflow-visible"
                 id="description"
                 name="description"
                 value={description}
