@@ -119,6 +119,14 @@ const NewBooking = () => {
         }
     }
   };
+  const handleChechOut = (date: Date) => {
+  if (date <= checkIn) {
+    toast.error("Check out date must be after check in date");
+    return;
+  } 
+  setCheckOut(date);
+  }
+
 
   return (
     <div>
@@ -157,14 +165,14 @@ const NewBooking = () => {
       <label className="text-2xl">Check in:</label>
       <DatePicker
       selectedDate={checkIn}
-      onDateChange={(e) =>setCheckIn(e!)}
+      onDateChange={(date) =>setCheckIn(date!)}
       
   /></div>
     <div className="flex flex-col">
       <label className="text-2xl">Check out:</label>
       <DatePicker
       selectedDate={checkOut}
-      onDateChange={(e) =>setCheckOut(e!)} />
+      onDateChange={(date) =>handleChechOut(date!)} />
       </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
