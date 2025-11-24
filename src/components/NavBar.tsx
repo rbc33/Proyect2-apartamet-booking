@@ -11,7 +11,7 @@ const NavBar = () => {
         <Link to="/" >
         <div className='flex items-center gap-5'>
 
-        <img src={logo} alt="Logo" className='size-14 mx-auto my-5 rounded-lg'/>
+        <img src={logo} alt="Logo" className='size-14 mx-auto mb-5 rounded-lg'/>
         <h1 className='text-center text-3xl font-bold'>Iron Apts</h1>
         </div>
         </Link>
@@ -19,13 +19,13 @@ const NavBar = () => {
         <NavLink
 				className={isActiveStyle}
 				to="/"
-			><button className='text-2xl  mt-5 mr-5'>Home</button></NavLink>
+			><button className='text-2xl   mr-5'>Home</button></NavLink>
         <NavLink
 				className={isActiveStyle}
-			 to="/newbooking"><button className='text-2xl mt-5 mr-5'>New Booking</button></NavLink>
+			 to="/newbooking"><button className='text-2xl  mr-5'>New Booking</button></NavLink>
         <NavLink
 				className={isActiveStyle}
-			 to="/about"><button className='text-2xl  mt-5 mr-5'>About</button></NavLink>
+			 to="/about"><button className='text-2xl   mr-5'>About</button></NavLink>
        <ThemeToggle />
         </div>
   )
