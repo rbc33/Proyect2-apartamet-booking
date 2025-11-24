@@ -144,10 +144,13 @@ async function getAvailableApartments(
 ) {
   try {
     // Get all apartments and bookings
-    const [allApartments, allBookings] = await Promise.all([
-      fetch(BASE_URL+ "/apartments").then((r) => r.json()),
-      fetch(BASE_URL+ "/bookings").then((r) => r.json()),
-    ]);
+    const resApt = await fetch(BASE_URL+ "/apartments")
+    const allApartments = await resApt.json();
+    console.log(allApartments)
+    const resBook = await fetch(BASE_URL+ "/bookings")
+    const allBookings = await resBook.json();
+    console.log(allBookings)
+    
 
     // Filter available apartments
     const availableApartments = allApartments.filter((apartment: Apartment) => {

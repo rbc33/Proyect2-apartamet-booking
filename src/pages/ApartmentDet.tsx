@@ -58,8 +58,8 @@ const ApartmentDet = () => {
                                 <h2 className="text-2xl mt-5">Bookings:</h2>
                                 {bookings.length === 0 && <p>No bookings for this apartment.</p>}
                                 {bookings.map((booking) => (
-                                    <div className='flex flex-col items-start justify-self-start'>
-                                    <div key={booking.id} className=" card border-2 border-slate-600 p-3 mt-2  w-[400px]">
+                                    <div key={booking.id} className='flex flex-col items-start justify-self-start'>
+                                    <div className=" card border-2 border-slate-600 p-3 mt-2  w-[400px]">
                                         <p className="text-xl">Guest Name: {booking.guestName}</p>
                                         <p className="text-xl">Guests: {booking.guests}</p>
                                         <p className="text-xl">From: {booking.in} </p><p className="text-xl">To: {booking.out}</p>
