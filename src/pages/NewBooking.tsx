@@ -6,61 +6,6 @@ import DatePicker from '../components/DatePicker';
 
 export const BASE_URL = "http://158.179.219.166:5555"
 
-function formatLocalInputDate(d: Date) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
-
-async function getAvailableApartments(
-  checkInDate: string,
-  checkOutDate: string,
-  guests: number = 1
-) {
-  try {
-    // Get all apartments and bookings
-    const [allApartments, allBookings] = await Promise.all([
-      fetch(BASE_URL+ "/apartments").then((r) => r.json()),
-      fetch(BASE_URL+ "/bookings").then((r) => r.json()),
-    ]);
-
-    // Filter available apartments
-    const availableApartments = allApartments.filter((apartment: Apartment) => {
-      // Get bookings for this specific apartment
-      const apartmentBookings: Booking[] = allBookings
-      .filter(
-        (booking: Booking) => booking.apartmentId === apartment.id
-      )
-      // Check availability
-      return checkAvailability(checkInDate, checkOutDate, apartmentBookings);
-    })
-    // Filter by capacity
-    .filter((apartment: Apartment) => apartment.capacity >= guests);
-
-    return availableApartments as Apartment[];
-  } catch (error) {
-    console.error("Error fetching available apartments:", error);
-    return [] as Apartment[];
-  }
-}
-
-function checkAvailability(
-  checkIn: string,
-  checkOut: string,
-  apartmentBookings: Booking[]
-) {
-  const checkInDate = new Date(checkIn);
-  const checkOutDate = new Date(checkOut);
-
-  return !apartmentBookings.some((booking) => {
-    const bookingIn = new Date(booking.in);
-    const bookingOut = new Date(booking.out);
-
-    // Check for date overlap
-    return checkInDate < bookingOut && checkOutDate > bookingIn;
-  });
-}
 
 const NewBooking = () => {
   const [apartaments, setApartaments] = useState<Apartment[]>([]);
@@ -83,16 +28,13 @@ const NewBooking = () => {
 
   const handleClick = async (apartment: Apartment) => {
     if (guestName === "") {
-      toast.error("Please enter a guest name");
+      toast.error("Please enter a guest name",{position: "top-right"});
       return;
     }
     if (guests < 1) {
-      toast.error("Please enter a valid number of guests");
+      toast.error("Please enter a valid number of guests",{position: "top-right"});
       return;
-    }
-    if (guests > apartment.capacity) {
-      toast.error("number of guests exceeds apartment capacity");
-      return;
+    
     } else {
 
         try {
@@ -111,7 +53,7 @@ const NewBooking = () => {
             if (!res.ok) {
                 throw new Error("Error creating booking");
             }
-            toast.success("Booking created successfully!");
+            toast.success("Booking created successfully!",{position: "top-right"});
             
             console.log("booking created", data);
         } catch (err) {
@@ -121,7 +63,7 @@ const NewBooking = () => {
   };
   const handleChechOut = (date: Date) => {
   if (date <= checkIn) {
-    toast.error("Check out date must be after check in date");
+    toast.error("Check out date must be after check in date",{position: "top-right"});
     return;
   } 
   setCheckOut(date);
@@ -187,3 +129,60 @@ const NewBooking = () => {
 };
 
 export default NewBooking;
+
+
+function formatLocalInputDate(d: Date) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+async function getAvailableApartments(
+  checkInDate: string,
+  checkOutDate: string,
+  guests: number = 1
+) {
+  try {
+    // Get all apartments and bookings
+    const [allApartments, allBookings] = await Promise.all([
+      fetch(BASE_URL+ "/apartments").then((r) => r.json()),
+      fetch(BASE_URL+ "/bookings").then((r) => r.json()),
+    ]);
+
+    // Filter available apartments
+    const availableApartments = allApartments.filter((apartment: Apartment) => {
+      // Get bookings for this specific apartment
+      const apartmentBookings: Booking[] = allBookings
+      .filter(
+        (booking: Booking) => booking.apartmentId === apartment.id
+      )
+      // Check availability
+      return checkAvailability(checkInDate, checkOutDate, apartmentBookings);
+    })
+    // Filter by capacity
+    .filter((apartment: Apartment) => apartment.capacity >= guests);
+
+    return availableApartments as Apartment[];
+  } catch (error) {
+    console.error("Error fetching available apartments:", error);
+    return [] as Apartment[];
+  }
+}
+
+function checkAvailability(
+  checkIn: string,
+  checkOut: string,
+  apartmentBookings: Booking[]
+) {
+  const checkInDate = new Date(checkIn);
+  const checkOutDate = new Date(checkOut);
+
+  return !apartmentBookings.some((booking) => {
+    const bookingIn = new Date(booking.in);
+    const bookingOut = new Date(booking.out);
+
+    // Check for date overlap
+    return checkInDate < bookingOut && checkOutDate > bookingIn;
+  });
+}
