@@ -1,6 +1,5 @@
-import React from 'react'
 import Lottie from 'react-lottie';
-import animationData from '../assets/r.json'
+import animationData from '../assets/r.json';
 
 
 const ErrorPage = () => {
