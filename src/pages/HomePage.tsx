@@ -21,7 +21,7 @@ const HomePage = () => {
         <div className="grid grid-cols-2 gap-4">
         {apartaments && apartaments.map((apartment) => (
             <li key={apartment.id}>
-                <AptCard id={apartment.id} name={apartment.name} description={apartment.description} size={apartment.size} capacity={apartment.capacity} pricePerDay={apartment.pricePerDay} image={apartment.image} />
+                <AptCard apartment={apartment} />
             </li>
         ))}
         </div>

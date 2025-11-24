@@ -119,8 +119,7 @@ const NewBooking = () => {
       </div>
       <div className="grid grid-cols-2 gap-4">
       {apartaments.map((apartment) => (
-         <AptCard key={apartment.id} id={apartment.id} name={apartment.name} description={apartment.description} size={apartment.size} capacity={apartment.capacity} pricePerDay={apartment.pricePerDay} image={apartment.image}>
-
+         <AptCard key={apartment.id} apartment={apartment}>
         <button className="mt-5 bg-blue-500 text-white px-4 py-2 rounded" onClick={() => handleClick(apartment)}> Book now </button>
         </AptCard>))}
         </div>

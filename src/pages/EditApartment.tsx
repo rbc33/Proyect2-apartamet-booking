@@ -137,7 +137,7 @@ const EditApartment = () => {
               Save Changes
             </button>
           </form>
-        <AptCard id={apartment.id} name={name} description={description} size={size} capacity={capacity} pricePerDay={pricePerDay} image={image} />
+        <AptCard apartment={apartment} />
         </div>
       )}
     </>

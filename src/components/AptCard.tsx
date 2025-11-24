@@ -2,11 +2,13 @@ import React from 'react'
 import type { Apartment } from '../types/types'
 import { Link } from 'react-router-dom'
 
-interface AptCardProps extends Apartment {
-    children?: React.ReactNode
+interface AptCardProps {
+  apartment: Apartment
+  children?: React.ReactNode
 }
 
-const AptCard = ({id,name,description, size, capacity,pricePerDay, image, children}: AptCardProps) => {
+const AptCard = ({apartment, children}: AptCardProps) => {
+  const {id,name,description, size, capacity,pricePerDay, image} = apartment 
   return (
     <div
             className="card border-2 border-slate-600 mt-5 flex w-[500px]"

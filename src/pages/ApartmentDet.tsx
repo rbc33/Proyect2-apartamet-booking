@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { BASE_URL } from './NewBooking'
 import {type Apartment, type Booking } from '../types/types'
+import AptCard from '../components/AptCard'
 
 const ApartmentDet = () => {
    const {id} = useParams()
@@ -43,16 +44,8 @@ const ApartmentDet = () => {
         <>
             {apartment && (
                 <div className='flex gap-5'>
-                    <div><div className="card border-2 border-slate-600 mt-5 flex" key={apartment.id}>
-                        <figure>
-                        <img src={apartment.image} alt={apartment.name} />
-                        </figure>
-                        <div className="card-body p-5 w-[500px]">
-                            <p className="text-3xl">{apartment.name} - {apartment.pricePerDay}€/day</p>
-                            <p className="text-2xl">Size: {apartment.size} m² - Capacity: {apartment.capacity} guests</p>
-                            <p className="text-2xl">{apartment.description}</p>
-                        </div>
-                    </div>
+                    <div>
+                       <AptCard apartment={apartment}/> 
                     <div className="flex">
                     <button className='btn btn-primary mt-5'><Link to="/">Back Home</Link></button>
                     <button className='btn btn-secondary mt-5 ml-5'><Link to={`/apartment/${apartment.id}/edit`}>Edit Apartment</Link></button>
