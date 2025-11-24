@@ -4,7 +4,8 @@ import toast from "react-hot-toast";
 import AptCard from "../components/AptCard";
 import DatePicker from '../components/DatePicker';
 
-export const BASE_URL = "http://158.179.219.166:5555"
+export const BASE_URL = "https://ironapt.rbenthem.es"
+// export const BASE_URL = "http://158.179.219.166:5555"
 
 
 const NewBooking = () => {
