@@ -1,7 +1,7 @@
-import { DayPicker } from 'react-day-picker';
+import { DayPicker, type Matcher } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
-const DatePicker = ({ selectedDate, onDateChange }: { selectedDate: Date | undefined, onDateChange: (date: Date) => void}) => {
+const DatePicker = ({ selectedDate, onDateChange, disabled = false }: { selectedDate: Date | undefined, onDateChange: (date: Date) => void, disabled?: Matcher | Matcher[]}) => {
   return (
     <div className="custom-datepicker">
       <style>{`
@@ -24,6 +24,7 @@ const DatePicker = ({ selectedDate, onDateChange }: { selectedDate: Date | undef
         className="rdp"
         selected={selectedDate}
         onSelect={(date) =>onDateChange(date!)}
+        disabled={disabled}
       />
     </div>
   );

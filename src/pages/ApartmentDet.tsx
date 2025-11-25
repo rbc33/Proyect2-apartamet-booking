@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { BASE_URL } from './NewBooking'
-import {type Apartment, type Booking } from '../types/types'
 import AptCard from '../components/AptCard'
+import { type Apartment, type Booking } from '../types/types'
+import { BASE_URL } from './NewBooking'
 
 interface ApartmentDet extends Apartment{
     bookings: Booking[]
 
 }
 const ApartmentDet = () => {
+    // TODO: crate context for dates instead new state and date pickers here
+    // const [checkIn, setCheckIn] = useState<Date | undefined>(new Date());
+    // const [checkOut, setCheckOut] = useState<Date | undefined>(undefined);
    const {id} = useParams()
    const [apartment, setApartment] = useState<ApartmentDet| undefined>()
 
@@ -75,6 +78,7 @@ const ApartmentDet = () => {
                             </div>
                         )}
                     </div>
+                    {/* <DatePicker */}
                 </div>
             )}
         </>
