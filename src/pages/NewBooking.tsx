@@ -22,7 +22,7 @@ const NewBooking = () => {
   const [guestName, setGuestName] = useState<string>("");
   const [hasChanged, setHasChanged] = useState<boolean>(false);
   useEffect(() => {
-    getAvailableApartments(formatLocalInputDate(checkIn), formatLocalInputDate(checkOut), guests).then((availableApartments) => {
+    getAvailableApartments(checkIn, checkOut, guests).then((availableApartments) => {
       setApartaments(availableApartments);
     });
   }, [checkIn, checkOut, guests, hasChanged ]);
@@ -147,8 +147,8 @@ function formatLocalInputDate(d: Date) {
 }
 
 async function getAvailableApartments(
-  checkInDate: string,
-  checkOutDate: string,
+  checkInDate: Date,
+  checkOutDate: Date,
   guests: number = 1
 ) {
   try {
@@ -182,18 +182,16 @@ async function getAvailableApartments(
 }
 
 function checkAvailability(
-  checkIn: string,
-  checkOut: string,
+  checkIn: Date,
+  checkOut: Date,
   apartmentBookings: Booking[]
 ) {
-  const checkInDate = new Date(checkIn);
-  const checkOutDate = new Date(checkOut);
 
   return !apartmentBookings.some((booking) => {
     const bookingIn = new Date(booking.in);
     const bookingOut = new Date(booking.out);
 
     // Check for date overlap
-    return checkInDate < bookingOut && checkOutDate > bookingIn;
+    return checkIn < bookingOut && checkOut > bookingIn;
   });
 }
