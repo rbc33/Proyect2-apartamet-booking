@@ -35,6 +35,11 @@ const NewBooking = () => {
     if (guests < 1) {
       toast.error("Please enter a valid number of guests",{position: "top-right"});
       return;
+    }
+    if (checkIn >= checkOut) {
+        toast.error("Check out date must be after check in date", {position: "top-right"});
+        return;
+  
     
     } else {
 
@@ -55,6 +60,7 @@ const NewBooking = () => {
                 throw new Error("Error creating booking");
             }
             setHasChanged(!hasChanged);
+            setGuestName("");
             toast.success("Booking created successfully!",{position: "top-right"});
             
             console.log("booking created", data);
@@ -63,13 +69,14 @@ const NewBooking = () => {
         }
     }
   };
-  const handleChechOut = (date: Date) => {
+  const handleCheckOut = (date: Date) => {
   if (date <= checkIn) {
     toast.error("Check out date must be after check in date",{position: "top-right"});
     return;
   } 
   setCheckOut(date);
   }
+
 
 
   return (
@@ -116,7 +123,7 @@ const NewBooking = () => {
       <label className="text-2xl">Check out:</label>
       <DatePicker
       selectedDate={checkOut}
-      onDateChange={(date) =>handleChechOut(date!)} />
+      onDateChange={(date) =>handleCheckOut(date!)} />
       </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
