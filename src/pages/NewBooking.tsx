@@ -4,8 +4,7 @@ import toast from "react-hot-toast";
 import AptCard from "../components/AptCard";
 import DatePicker from '../components/DatePicker';
 
-export const BASE_URL = "https://ironapt.rbenthem.es"
-// export const BASE_URL = "http://158.179.219.166:5555"
+export const BASE_URL = "/api"
 
 
 const NewBooking = () => {
@@ -21,11 +20,12 @@ const NewBooking = () => {
   const [checkOut, setCheckOut] = useState<Date>(tomorrowDate);
   const [guests, setGuests] = useState<number>(1);
   const [guestName, setGuestName] = useState<string>("");
+  const [hasChanged, setHasChanged] = useState<boolean>(false);
   useEffect(() => {
     getAvailableApartments(formatLocalInputDate(checkIn), formatLocalInputDate(checkOut), guests).then((availableApartments) => {
       setApartaments(availableApartments);
     });
-  }, [checkIn, checkOut, guests ]);
+  }, [checkIn, checkOut, guests, hasChanged ]);
 
   const handleClick = async (apartment: Apartment) => {
     if (guestName === "") {
@@ -54,6 +54,7 @@ const NewBooking = () => {
             if (!res.ok) {
                 throw new Error("Error creating booking");
             }
+            setHasChanged(!hasChanged);
             toast.success("Booking created successfully!",{position: "top-right"});
             
             console.log("booking created", data);

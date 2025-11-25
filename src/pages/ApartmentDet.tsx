@@ -4,35 +4,40 @@ import { BASE_URL } from './NewBooking'
 import {type Apartment, type Booking } from '../types/types'
 import AptCard from '../components/AptCard'
 
+interface ApartmentDet extends Apartment{
+    bookings: Booking[]
+
+}
 const ApartmentDet = () => {
    const {id} = useParams()
-   const [apartment, setApartment] = useState<Apartment| undefined>()
-   const [bookings, setBookings] = useState<Booking[]|undefined>()
+   const [apartment, setApartment] = useState<ApartmentDet| undefined>()
 
    useEffect(() => {
    const fetchApt = async() => {
-       const response = await fetch(BASE_URL+`/apartments/${id}`)
-       const data = await response.json()
+
+       const res = await fetch(BASE_URL+`/apartments/${id}?_embed=bookings`)
+       const data = await res.json()
        console.log(data)
        setApartment(data)
    }
-   const fetchBooking = async() => {
-    const response = await fetch(BASE_URL+`/bookings?apartmentId=${id}`)
-    const data = await response.json()
-    console.log(data)
-    setBookings(data)
-   }
+
     fetchApt()
-    fetchBooking()
     
-   }, [id])
+   }, [id, apartment?.bookings.length])
    const handleDelete = async(bookingId:number) => {
     try {
         const response = await fetch(BASE_URL+`/bookings/${bookingId}`, {
             method: 'DELETE',
         });
         if (response.ok) {
-            setBookings((prevBookings) => prevBookings?.filter((booking) => booking.id !== bookingId));
+            setApartment((currentApartment) => {
+                if (!currentApartment) {
+                  return undefined;}
+                return {
+                  ...currentApartment,
+                  bookings: currentApartment.bookings.filter((booking) => booking.id !== bookingId),
+                };
+              });
         } else {
             console.error('Failed to delete booking');
         }
@@ -53,11 +58,11 @@ const ApartmentDet = () => {
                     </div>
 
                     <div>
-                        {bookings && (
+                        {apartment.bookings && (
                             <div>
                                 <h2 className="text-2xl mt-5">Bookings:</h2>
-                                {bookings.length === 0 && <p>No bookings for this apartment.</p>}
-                                {bookings.map((booking) => (
+                                {apartment.bookings.length === 0 && <p>No bookings for this apartment.</p>}
+                                {apartment.bookings.map((booking) => (
                                     <div key={booking.id} className='flex flex-col items-start justify-self-start'>
                                     <div className=" card border-2 border-slate-600 p-3 mt-2  w-[400px]">
                                         <p className="text-xl">Guest Name: {booking.guestName}</p>
