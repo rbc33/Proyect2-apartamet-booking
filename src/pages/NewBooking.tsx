@@ -74,10 +74,6 @@ const NewBooking = () => {
 
   return (
     <div>
-      <p className="text-3xl mt-5">
-        {apartaments.length} Apartments available.
-      </p>
-      <br />
 
       <BookingForm
         dateRange={dateRange}
@@ -88,6 +84,10 @@ const NewBooking = () => {
         setGuestName={setGuestName}
       />
 
+        <p className="text-3xl mt-5">
+          {apartaments.length} Apartments available.
+        </p>
+        <br />
       <div className="grid grid-cols-2 gap-4">
         {apartaments.map((apartment) => (
           <AptCard key={apartment.id} apartment={apartment}>

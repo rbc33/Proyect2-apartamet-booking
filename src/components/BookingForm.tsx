@@ -20,7 +20,7 @@ const BookingForm = ({
 }: BookingFormProps) => {
   
   return (
-    <div className="flex gap-40">
+    <div className="flex justify-center gap-40 mt-5">
       <div className="flex flex-col items-start gap-2 my-4">
       
       <label htmlFor="guests">Guests:</label>
@@ -46,7 +46,7 @@ const BookingForm = ({
         name="guestName"
         onChange={(e) => setGuestName(e.target.value)}
       />
-      <button className="mt-5 bg-blue-500 text-white px-4 py-2 rounded justify-self-center" onClick={() => setDateRange(undefined)}> Clear dates </button>
+      <button className="btn btn-primary mt-5 text-white px-4 py-2 rounded justify-self-center" onClick={() => setDateRange(undefined)}> Clear dates </button>
       </div>
           <div className="flex flex-col">
 
