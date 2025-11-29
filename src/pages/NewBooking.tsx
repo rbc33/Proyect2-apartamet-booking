@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { type Apartment, type Booking } from "../types/types";
 import toast from "react-hot-toast";
 import AptCard from "../components/AptCard";
+ import {type DateRange} from 'react-day-picker';
 import DatePicker from '../components/DatePicker';
 
 export const BASE_URL = "/api"
@@ -11,21 +12,21 @@ const NewBooking = () => {
   const [apartaments, setApartaments] = useState<Apartment[]>([]);
 
   const now = new Date();
-  // const today = formatLocalInputDate(now);
   const tomorrowDate = new Date(now);
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-  // const tomorrow = formatLocalInputDate(tomorrowDate);
 
-  const [checkIn, setCheckIn] = useState<Date>(now);
-  const [checkOut, setCheckOut] = useState<Date>(tomorrowDate);
+  const [dateRange, setDateRange] = useState<DateRange|undefined>();
+  console.log(dateRange);
   const [guests, setGuests] = useState<number>(1);
   const [guestName, setGuestName] = useState<string>("");
   const [hasChanged, setHasChanged] = useState<boolean>(false);
   useEffect(() => {
-    getAvailableApartments(checkIn, checkOut, guests).then((availableApartments) => {
+    if (dateRange) {
+    getAvailableApartments(dateRange.from!, dateRange.to!, guests).then((availableApartments) => {
       setApartaments(availableApartments);
     });
-  }, [checkIn, checkOut, guests, hasChanged ]);
+  }
+  }, [dateRange, guests, hasChanged ]);
 
   const handleClick = async (apartment: Apartment) => {
     if (guestName === "") {
@@ -35,22 +36,20 @@ const NewBooking = () => {
     if (guests < 1) {
       toast.error("Please enter a valid number of guests",{position: "top-right"});
       return;
-    }
-    if (checkIn >= checkOut) {
-        toast.error("Check out date must be after check in date", {position: "top-right"});
-        return;
-  
-    
     } else {
 
         try {
+          if (!dateRange?.from || !dateRange.to) {
+            toast.error("Please select a valid date range",{position: "top-right"});
+            return;
+          }
             const res = await fetch(BASE_URL + "/bookings", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     apartmentId: apartment.id,
-                    in: formatLocalInputDate(checkIn),
-                    out: formatLocalInputDate(checkOut),
+                    in: formatLocalInputDate(dateRange.from),
+                    out: formatLocalInputDate(dateRange.to!),
                     guestName: guestName,
                     guests: guests,
                 }),
@@ -69,13 +68,7 @@ const NewBooking = () => {
         }
     }
   };
-  const handleCheckOut = (date: Date) => {
-  if (date <= checkIn) {
-    toast.error("Check out date must be after check in date",{position: "top-right"});
-    return;
-  } 
-  setCheckOut(date);
-  }
+
 
 
 
@@ -110,29 +103,26 @@ const NewBooking = () => {
         name="guestName"
         onChange={(e) => setGuestName(e.target.value)}
       />
+      <button className="mt-5 bg-blue-500 text-white px-4 py-2 rounded justify-self-center" onClick={() => setDateRange(undefined)}> Clear dates </button>
       </div>
           <div className="flex flex-col">
 
-      <label className="text-2xl">Check in:</label>
+      <label className="text-2xl">{(dateRange?.from)? "Selecet Check out:" : "Select Check in:"}</label>
       <DatePicker
-      selectedDate={checkIn}
-      onDateChange={(date) =>setCheckIn(date!)}
+      selectedDate={dateRange}
+      onDateChange={(dateRange) =>setDateRange(dateRange!)}
       
-  /></div>
-    <div className="flex flex-col">
-      <label className="text-2xl">Check out:</label>
-      <DatePicker
-      selectedDate={checkOut}
-      onDateChange={(date) =>handleCheckOut(date!)} />
-      </div>
+  />
+</div>
       </div>
       <div className="grid grid-cols-2 gap-4">
       {apartaments.map((apartment) => (
          <AptCard key={apartment.id} apartment={apartment}>
         <button className="mt-5 bg-blue-500 text-white px-4 py-2 rounded" onClick={() => handleClick(apartment)}> Book now </button>
         </AptCard>))}
+       
         </div>
-    </div>
+    </div> 
   );
 };
 
