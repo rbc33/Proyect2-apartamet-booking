@@ -19,13 +19,11 @@ const NewBooking = () => {
   const [guestName, setGuestName] = useState<string>("");
   const [hasChanged, setHasChanged] = useState<boolean>(false);
   useEffect(() => {
-    if (dateRange) {
-      getAvailableApartments(dateRange.from!, dateRange.to!, guests).then(
+      getAvailableApartments(dateRange?.from, dateRange?.to, guests).then(
         (availableApartments) => {
           setApartaments(availableApartments);
         }
       );
-    }
   }, [dateRange, guests, hasChanged]);
 
   const handleClick = async (apartment: Apartment) => {
@@ -118,8 +116,8 @@ export function formatLocalInputDate(d: Date) {
 }
 
 async function getAvailableApartments(
-  checkInDate: Date,
-  checkOutDate: Date,
+  checkInDate: Date | undefined,
+  checkOutDate: Date | undefined,
   guests: number = 1
 ) {
   try {
@@ -131,6 +129,9 @@ async function getAvailableApartments(
     const allBookings = await resBook.json();
     console.log(allBookings);
 
+    if (!checkInDate || !checkOutDate) {
+      return allApartments as Apartment[];
+    }
     // Filter available apartments
     const availableApartments = allApartments
       .filter((apartment: Apartment) => {
