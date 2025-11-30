@@ -15,7 +15,9 @@ const AptCard = ({apartment, children}: AptCardProps) => {
             key={id}
           >
             <figure>
+              <Link to={`/apartment/${id}`}>
               <img src={image} alt={name} />
+              </Link>
             </figure>
             <div className="card-body p-5 w-[500px]">
                 <Link to={`/apartment/${id}`}>
