@@ -11,7 +11,7 @@ const BookingCard = ({ booking, handleDelete }: BookingCardProps) => {
       key={booking.id}
       className="flex flex-col items-start justify-self-start"
     >
-      <div className=" card border-2 border-slate-600 p-3 mt-2  w-[400px]">
+      <div className=" card border-2 border-slate-600 p-3 mt-2  w-[300px]">
         <p className="text-xl">Guest Name: {booking.guestName}</p>
         <p className="text-xl">Guests: {booking.guests}</p>
         <p className="text-xl">
