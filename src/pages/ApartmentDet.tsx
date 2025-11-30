@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import type { DateRange } from 'react-day-picker'
+import { toast } from 'react-hot-toast'
 import { Link, useParams } from 'react-router-dom'
 import AptCard from '../components/AptCard'
+import BookingCard from '../components/BookingCard'
 import DatePicker from '../components/DatePicker'
 import { type Apartment, type Booking } from '../types/types'
-import { BASE_URL, formatLocalInputDate } from './NewBooking'
-import { toast } from 'react-hot-toast'
-import BookingCard from '../components/BookingCard'
+import { BASE_URL } from './NewBooking'
 
 interface ApartmentDet extends Apartment{
     bookings: Booking[]
@@ -79,8 +79,8 @@ const ApartmentDet = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             apartmentId: apartment.id,
-            in: formatLocalInputDate(dateRange.from),
-            out: formatLocalInputDate(dateRange.to!),
+            in: dateRange.from,
+            out: dateRange.to!,
             guestName: guestName,
             guests: guests,
           }),

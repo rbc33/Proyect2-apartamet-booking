@@ -24,6 +24,7 @@ const NewBooking = () => {
           setApartaments(availableApartments);
         }
       );
+      console.log(dateRange)
   }, [dateRange, guests, hasChanged]);
 
   const handleClick = async (apartment: Apartment) => {
@@ -49,8 +50,8 @@ const NewBooking = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             apartmentId: apartment.id,
-            in: formatLocalInputDate(dateRange.from),
-            out: formatLocalInputDate(dateRange.to!),
+            in: dateRange.from,
+            out: dateRange.to!,
             guestName: guestName,
             guests: guests,
           }),
@@ -109,13 +110,7 @@ const NewBooking = () => {
 
 export default NewBooking;
 
-// eslint-disable-next-line react-refresh/only-export-components
-export function formatLocalInputDate(d: Date) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
+
 
 async function getAvailableApartments(
   checkInDate: Date | undefined,

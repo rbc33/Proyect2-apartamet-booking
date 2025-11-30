@@ -11,8 +11,8 @@ export interface Apartment {
 export  interface Booking {
   id: number;
   apartmentId: number;
-  in: string;
-  out: string;
+  in: Date;
+  out: Date;
   guestName: string;
   guests: number;
 }
