@@ -11,7 +11,7 @@ const AptCard = ({apartment, children}: AptCardProps) => {
   const {id,name,description, size, capacity,pricePerDay, image} = apartment 
   return (
     <div
-            className="card border-2 border-slate-600 mt-5 flex w-[80vw] md:w-[500px]"
+            className="card border-2 border-slate-600 mt-5 flex justify-center w-[80vw] md:w-[35vw] max-w-[500px]"
             key={id}
           >
             <figure>
@@ -19,7 +19,7 @@ const AptCard = ({apartment, children}: AptCardProps) => {
               <img src={image} alt={name} />
               </Link>
             </figure>
-            <div className="card-body p-5 w-[80vw] md:w-[500px]">
+            <div className="card-body p-5 w-[80vw] md:w-[35vw] max-w-[500px]">
                 <Link to={`/apartment/${id}`}>
               <p className="text-3xl">
                 {name} - {pricePerDay}€/day
