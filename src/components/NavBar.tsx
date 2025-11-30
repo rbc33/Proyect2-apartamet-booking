@@ -21,7 +21,7 @@ const NavBar = () => {
           <h1 className="text-center text-3xl font-bold">Iron Apts</h1>
         </div>
       </Link>
-      <div className="hidden grow flex items-center">
+      <div className="hidden grow md:flex items-center justify-end">
         <NavLink className={isActiveStyle} to="/">
           <button className="text-2xl mr-5">Home</button>
         </NavLink>
