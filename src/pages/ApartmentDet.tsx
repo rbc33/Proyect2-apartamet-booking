@@ -114,8 +114,8 @@ const ApartmentDet = () => {
                     </div>
 
                     
-                   <div className="card flex flex-col h-fit items-start gap-2 my-4 border-2 border-slate-600 p-3">
-      <div className="flex flex-col items-start gap-2 my-4">
+                   <div className="card flex flex-col h-fit items-start gap-2 mt-5 border-2 border-slate-600 p-3">
+      <div className="flex flex-col items-start gap-2">
       
     <label htmlFor="guests">Guests:</label>
       <input
