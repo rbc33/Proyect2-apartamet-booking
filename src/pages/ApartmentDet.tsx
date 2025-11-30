@@ -6,6 +6,7 @@ import DatePicker from '../components/DatePicker'
 import { type Apartment, type Booking } from '../types/types'
 import { BASE_URL, formatLocalInputDate } from './NewBooking'
 import { toast } from 'react-hot-toast'
+import BookingCard from '../components/BookingCard'
 
 interface ApartmentDet extends Apartment{
     bookings: Booking[]
@@ -112,28 +113,11 @@ const ApartmentDet = () => {
                     </div>
                     </div>
 
-                    <div>
-                        {apartment.bookings && (
-                            <div>
-                                <h2 className="text-2xl mt-5">Bookings:</h2>
-                                {apartment.bookings.length === 0 && <p>No bookings for this apartment.</p>}
-                                {apartment.bookings.map((booking) => (
-                                    <div key={booking.id} className='flex flex-col items-start justify-self-start'>
-                                    <div className=" card border-2 border-slate-600 p-3 mt-2  w-[400px]">
-                                        <p className="text-xl">Guest Name: {booking.guestName}</p>
-                                        <p className="text-xl">Guests: {booking.guests}</p>
-                                        <p className="text-xl">From: {booking.in} </p><p className="text-xl">To: {booking.out}</p>
-                                    <button className='btn btn-secondary mt-2 justify-self-start' onClick={() => handleDelete(booking.id)}>Delete</button>
-                                    </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                   <div className="flex flex-col items-start gap-2 my-4">
+                    
+                   <div className="card flex flex-col h-fit items-start gap-2 my-4 border-2 border-slate-600 p-3">
       <div className="flex flex-col items-start gap-2 my-4">
       
-      <label htmlFor="guests">Guests:</label>
+    <label htmlFor="guests">Guests:</label>
       <input
               className="input mx-2"
 
@@ -172,6 +156,17 @@ const ApartmentDet = () => {
       <button className="btn btn-primary mt-5 text-white px-4 py-2 rounded justify-self-center" onClick={() => setDateRange(undefined)}> Clear dates </button>
 </div>
       </div>
+      <div>
+                        {apartment.bookings && (
+                            <div>
+                                <h2 className="text-2xl mt-5">Bookings:</h2>
+                                {apartment.bookings.length === 0 && <p>No bookings for this apartment.</p>}
+                                {apartment.bookings.map((booking) => (
+                                   <BookingCard key={booking.id} booking={booking} handleDelete={handleDelete}/> 
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
         </>
