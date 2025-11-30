@@ -88,7 +88,7 @@ const NewBooking = () => {
           {apartaments.length} Apartments available.
         </p>
         <br />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         {apartaments.map((apartment) => (
           <AptCard key={apartment.id} apartment={apartment}>
             <button

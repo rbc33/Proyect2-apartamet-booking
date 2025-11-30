@@ -104,7 +104,7 @@ const ApartmentDet = () => {
     return (
         <>
             {apartment && (
-                <div className='flex gap-5'>
+                <div className='flex flex-col md:flex-row justify-center items-center gap-5'>
                     <div>
                        <AptCard apartment={apartment}/> 
                     <div className="flex">
