@@ -46,7 +46,7 @@ const BookingForm = ({
         name="guestName"
         onChange={(e) => setGuestName(e.target.value)}
       />
-      <button className="btn btn-primary hidden md:visible mt-5 text-white px-4 py-2 rounded justify-self-center w-full" onClick={() => setDateRange(undefined)}> Clear dates </button>
+      <button className="btn btn-primary hidden md:flex mt-5 text-white px-4 py-2 rounded justify-self-center w-full" onClick={() => setDateRange(undefined)}> Clear dates </button>
       </div>
           <div className="flex flex-col">
 
