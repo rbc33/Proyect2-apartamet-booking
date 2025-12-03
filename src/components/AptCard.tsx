@@ -11,7 +11,7 @@ const AptCard = ({apartment, children}: AptCardProps) => {
   const {id,name,description, size, capacity,pricePerDay, image} = apartment 
   return (
     <div
-            className="card border-2 border-slate-600 mt-5 flex justify-center w-[80vw] md:w-[35vw] max-w-[500px]"
+            className="card border-2 border-slate-600 flex justify-center w-[80vw] md:w-[35vw] max-w-[500px]"
             key={id}
           >
             <figure>

@@ -10,7 +10,7 @@ const NavBar = () => {
       : "hover:text-slate-500 dark:hover:text-slate-400!";
 
   return (
-    <div className="flex justify-between items-center border-b-2 border-slate-600">
+    <div className="flex justify-between items-center border-b-2 border-slate-600 mb-5">
       <Link to="/">
         <div className="flex items-center gap-5">
           <img
@@ -44,17 +44,17 @@ const NavBar = () => {
         >
           <li>
             <NavLink className={isActiveStyle} to="/">
-              <button className="text-2xl mr-5">Home</button>
+              <button className="text-2xl">Home</button>
             </NavLink>
           </li>
           <li>
             <NavLink className={isActiveStyle} to="/newbooking">
-              <button className="text-2xl  mr-5">New Booking</button>
+              <button className="text-2xl">New Booking</button>
             </NavLink>
           </li>
           <li>
             <NavLink className={isActiveStyle} to="/about">
-              <button className="text-2xl   mr-5">About</button>
+              <button className="text-2xl">About</button>
             </NavLink>
           </li>
         </ul>

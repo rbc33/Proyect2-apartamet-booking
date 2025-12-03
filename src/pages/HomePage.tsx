@@ -17,9 +17,9 @@ const HomePage = () => {
     fetchApts()
     }, [])
   return (
-    <><h1 className='text-center text-5xl'>Apartments list</h1>
+    <><h1 className='text-center text-5xl my-5'>Apartments list</h1>
     <div className="flex justify-center">
-        <div className="grid md:grid-cols-2 gap-20">
+        <div className="grid md:grid-cols-2 gap-20 mt-5">
         {apartaments && apartaments.map((apartment) => (
                 <AptCard key={apartment.id} apartment={apartment} />
         ))}
