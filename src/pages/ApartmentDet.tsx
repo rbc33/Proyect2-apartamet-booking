@@ -157,7 +157,12 @@ const ApartmentDet = () => {
                     />
                   </div>
                 </div>
-                <button className="btn btn-error btn-sm text-white mt-2" onClick={() => setDateRange(undefined)}> Clear dates </button>
+                <button
+                  className="btn btn-error text-white mt-4"
+                  onClick={() => setDateRange(undefined)}
+                  disabled={!dateRange}
+                >Clear dates</button>
+
               </div>
             </div>
           </div>

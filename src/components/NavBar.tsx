@@ -18,7 +18,7 @@ const NavBar = () => {
           <p className="text-2xl font-semibold">IronApts</p>
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1 gap-2">
           <li>
             <NavLink className={isActiveStyle} to="/">
@@ -41,7 +41,7 @@ const NavBar = () => {
         <ThemeToggle />
       </div>
       <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden focus:bg-slate-300 dark:focus:bg-slate-600">
+          <div tabIndex={0} role="button" className="btn btn-ghost md:hidden focus:bg-slate-300 dark:focus:bg-slate-600">
             <GiHamburgerMenu className="text-xl" />
           </div>
           <ul
