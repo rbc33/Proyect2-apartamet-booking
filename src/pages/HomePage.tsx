@@ -12,7 +12,6 @@ const HomePage = () => {
       const data = await res.json()
 
       setApartaments(data)
-      console.log(data)
     }
     fetchApts()
   }, [])

@@ -25,7 +25,6 @@ const ApartmentDet = () => {
 
       const res = await fetch(BASE_URL + `/apartments/${id}?_embed=bookings`)
       const data = await res.json()
-      console.log(data)
       setApartment(data)
     }
 
@@ -83,7 +82,6 @@ const ApartmentDet = () => {
             guests: guests,
           }),
         });
-        const data = await res.json();
         if (!res.ok) {
           throw new Error("Error creating booking");
         }
@@ -93,7 +91,6 @@ const ApartmentDet = () => {
           position: "top-right",
         });
 
-        console.log("booking created", data);
       } catch (err) {
         console.error("booking error", err);
       }

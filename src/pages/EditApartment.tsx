@@ -19,7 +19,6 @@ const EditApartment = () => {
     const fetchApt = async () => {
       const response = await fetch(BASE_URL + `/apartments/${id}`);
       const data = await response.json();
-      console.log(data);
       setApartment(data);
       setName(data.name);
       setDescription(data.description);
@@ -52,8 +51,6 @@ const EditApartment = () => {
 
       });
       if (response.ok) {
-        const data = await response.json();
-        console.log("Apartment updated successfully:", data);
         navigate(`/apartment/${apartment.id}`)
       } else {
         console.error("Failed to update apartment");

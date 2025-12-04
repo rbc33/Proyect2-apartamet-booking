@@ -24,7 +24,6 @@ const NewBooking = () => {
         setApartaments(availableApartments);
       }
     );
-    console.log(dateRange)
   }, [dateRange, guests, hasChanged]);
 
   const handleClick = async (apartment: Apartment) => {
@@ -56,7 +55,6 @@ const NewBooking = () => {
             guests: guests,
           }),
         });
-        const data = await res.json();
         if (!res.ok) {
           throw new Error("Error creating booking");
         }
@@ -66,7 +64,6 @@ const NewBooking = () => {
           position: "top-right",
         });
 
-        console.log("booking created", data);
       } catch (err) {
         console.error("booking error", err);
       }
@@ -122,10 +119,8 @@ async function getAvailableApartments(
     // Get all apartments and bookings
     const resApt = await fetch(BASE_URL + "/apartments");
     const allApartments = await resApt.json();
-    console.log(allApartments);
     const resBook = await fetch(BASE_URL + "/bookings");
     const allBookings = await resBook.json();
-    console.log(allBookings);
 
     if (!checkInDate || !checkOutDate) {
       return allApartments as Apartment[];
