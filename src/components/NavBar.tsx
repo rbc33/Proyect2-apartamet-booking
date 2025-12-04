@@ -13,9 +13,9 @@ const NavBar = () => {
     <div className="navbar bg-base-100 shadow-md mb-5 rounded-box">
       <div className="navbar-start">
         
-        <Link to="/" className="btn btn-ghost text-2xl gap-2">
+        <Link to="/" className="btn btn-ghost gap-2">
           <img src={logo} alt="Logo" className="w-8 h-8 rounded-lg" />
-          IronApts
+          <p className="text-2xl font-semibold">IronApts</p>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

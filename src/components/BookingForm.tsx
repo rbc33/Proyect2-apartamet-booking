@@ -66,10 +66,10 @@ const BookingForm = ({
         <div className="flex-1 flex flex-col gap-2">
           <label className="label">
             <span className="label-text text-lg font-semibold">
-              {(dateRange?.from) ? "Select Check out:" : "Select Check in:"}
+              {(dateRange?.from) ? "Select Check out" : "Select Check in"}
             </span>
           </label>
-          <div className="border rounded-lg p-2 flex justify-center bg-base-200/50">
+          <div className="border border-slate-600 rounded-lg p-2 flex justify-center bg-base-200/50">
             <DatePicker
               selectedDate={dateRange}
               onDateChange={(dateRange) => setDateRange(dateRange!)}
