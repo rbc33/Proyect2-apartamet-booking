@@ -11,54 +11,80 @@ interface BookingFormProps {
 }
 
 const BookingForm = ({
-    dateRange,
-    setDateRange,
-    guests,
-    setGuests,
-    guestName,
-    setGuestName,
+  dateRange,
+  setDateRange,
+  guests,
+  setGuests,
+  guestName,
+  setGuestName,
 }: BookingFormProps) => {
-  
+
   return (
-    <div className="flex flex-col md:flex-row items-center md:justify-center md:gap-40 mt-5">
-      <div className="flex flex-col items-start gap-2 my-4">
-      
-      <label htmlFor="guests">Guests:</label>
-      <input
-              className="input mx-2"
+    <div className="card bg-base-100 shadow-lg p-6 max-w-4xl mx-auto mt-5">
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1 flex flex-col gap-4">
+          <div className="form-control w-full">
+            <label className="label" htmlFor="guests">
+              <span className="label-text font-semibold">Guests</span>
+            </label>
+            <input
+              className="input input-bordered w-full"
+              type="number"
+              id="guests"
+              value={guests}
+              name="guests"
+              min={1}
+              max={10}
+              onChange={(e) => setGuests(Number(e.target.value))}
+            />
+          </div>
 
-        type="number"
-        id="guests"
-        value={guests}
-        name="guests"
-        min={1}
-        max={10}
-        onChange={(e) => {
-          setGuests(Number(e.target.value))}}
-      />
-      <label htmlFor="guestName">Guest Name:</label>
-      <input
-              className="input mx-2"
+          <div className="form-control w-full">
+            <label className="label" htmlFor="guestName">
+              <span className="label-text font-semibold">Guest Name</span>
+            </label>
+            <input
+              className="input input-bordered w-full"
+              type="text"
+              id="guestName"
+              value={guestName}
+              name="guestName"
+              placeholder="Enter your name"
+              onChange={(e) => setGuestName(e.target.value)}
+            />
+          </div>
 
-        type="text"
-        id="guestName"
-        value={guestName}
-        name="guestName"
-        onChange={(e) => setGuestName(e.target.value)}
-      />
-      <button className="btn btn-primary hidden md:flex mt-5 text-white px-4 py-2 rounded justify-self-center w-full" onClick={() => setDateRange(undefined)}> Clear dates </button>
+          <button
+            className="btn btn-outline btn-error mt-auto hidden md:flex"
+            onClick={() => setDateRange(undefined)}
+            disabled={!dateRange}
+          >
+            Clear dates
+          </button>
+        </div>
+
+        <div className="flex-1 flex flex-col gap-2">
+          <label className="label">
+            <span className="label-text text-lg font-semibold">
+              {(dateRange?.from) ? "Select Check out:" : "Select Check in:"}
+            </span>
+          </label>
+          <div className="border rounded-lg p-2 flex justify-center bg-base-200/50">
+            <DatePicker
+              selectedDate={dateRange}
+              onDateChange={(dateRange) => setDateRange(dateRange!)}
+            />
+          </div>
+          <button
+            className="btn btn-outline btn-error md:hidden mt-4"
+            onClick={() => setDateRange(undefined)}
+            disabled={!dateRange}
+          >
+            Clear dates
+          </button>
+        </div>
       </div>
-          <div className="flex flex-col">
-
-      <label className="text-2xl">{(dateRange?.from)? "Selecet Check out:" : "Select Check in:"}</label>
-      <DatePicker
-      selectedDate={dateRange}
-      onDateChange={(dateRange) =>setDateRange(dateRange!)}
-      
-  />
-      <button className="btn btn-primary  md:hidden mt-5 text-white px-4 py-2 rounded justify-self-center w-full" onClick={() => setDateRange(undefined)}> Clear dates </button>
-</div>
-      </div>
+    </div>
   )
 }
 

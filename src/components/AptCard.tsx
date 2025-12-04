@@ -7,31 +7,31 @@ interface AptCardProps {
   children?: React.ReactNode
 }
 
-const AptCard = ({apartment, children}: AptCardProps) => {
-  const {id,name,description, size, capacity,pricePerDay, image} = apartment 
+const AptCard = ({ apartment, children }: AptCardProps) => {
+  const { id, name, description, size, capacity, pricePerDay, image } = apartment
   return (
-    <div
-            className="card border-2 border-slate-600 flex justify-center w-[80vw] md:w-[35vw] max-w-[500px]"
-            key={id}
-          >
-            <figure>
-              <Link to={`/apartment/${id}`}>
-              <img src={image} alt={name} />
-              </Link>
-            </figure>
-            <div className="card-body p-5 w-[80vw] md:w-[35vw] max-w-[500px]">
-                <Link to={`/apartment/${id}`}>
-              <p className="text-3xl">
-                {name} - {pricePerDay}€/day
-              </p></Link>
-              <p className="text-2xl">
-                Size: {size} m² - Capacity: {capacity} guests
-              </p>
-              <p className="text-2xl">{description}</p>
-              {children}
-            </div>
-            
-          </div>
+    <div className="card border-2 border-slate-600 bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+      <figure>
+        <Link to={`/apartment/${id}`} className="w-full h-64 overflow-hidden">
+          <img src={image} alt={name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+        </Link>
+      </figure>
+      <div className="card-body">
+        <Link to={`/apartment/${id}`}>
+          <h2 className="card-title hover:text-primary transition-colors">
+            {name}
+            <div className="badge badge-secondary">{pricePerDay}€/day</div>
+          </h2>
+        </Link>
+        <div className="flex gap-2 text-sm text-base-content/70">
+          <span>Size: {size} m²</span>
+          <span>•</span>
+          <span>Capacity: {capacity} guests</span>
+        </div>
+        <p className="line-clamp-3">{description}</p>
+        {children && <div className="card-actions justify-end mt-4">{children}</div>}
+      </div>
+    </div>
   )
 }
 

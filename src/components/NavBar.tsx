@@ -6,58 +6,57 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const NavBar = () => {
   const isActiveStyle = ({ isActive }: { isActive: boolean }) =>
     isActive
-      ? " text-slate-500 dark:text-slate-400"
-      : "hover:text-slate-500 dark:hover:text-slate-400!";
+      ? "btn btn-ghost text-primary text-2xl"
+      : "btn btn-ghost text-2xl";
 
   return (
-    <div className="flex justify-between items-center border-b-2 border-slate-600 mb-5">
-      <Link to="/">
-        <div className="flex items-center gap-5">
-          <img
-            src={logo}
-            alt="Logo"
-            className="size-14 mx-auto mb-5 rounded-lg"
-          />
-          <h1 className="text-center text-3xl font-bold">Iron Apts</h1>
+    <div className="navbar bg-base-100 shadow-md mb-5 rounded-box">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <GiHamburgerMenu className="text-xl" />
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <NavLink to="/"><p className="text-xl">Home</p></NavLink>
+            </li>
+            <li>
+              <NavLink to="/newbooking"><p className="text-xl">New Booking</p></NavLink>
+            </li>
+            <li>
+              <NavLink to="/about"><p className="text-xl">About</p></NavLink>
+            </li>
+          </ul>
         </div>
-      </Link>
-      <div className="hidden grow md:flex items-center justify-end">
-        <NavLink className={isActiveStyle} to="/">
-          <button className="text-2xl mr-5">Home</button>
-        </NavLink>
-        <NavLink className={isActiveStyle} to="/newbooking">
-          <button className="text-2xl  mr-5">New Booking</button>
-        </NavLink>
-        <NavLink className={isActiveStyle} to="/about">
-          <button className="text-2xl   mr-5">About</button>
-        </NavLink>
-        <ThemeToggle />
+        <Link to="/" className="btn btn-ghost text-xl gap-2">
+          <img src={logo} alt="Logo" className="w-8 h-8 rounded-lg" />
+          Iron Apts
+        </Link>
       </div>
-      <div className="md:hidden dropdown dropdown-end">
-        <ThemeToggle />
-        <div tabIndex={0} role="button" className="btn bg-base-300 dark:bg-[#393d4e] m-1 mx-2">
-          <GiHamburgerMenu />
-        </div>
-        <ul
-          tabIndex={-1}
-          className="dropdown-content menu bg-base-300 dark:bg-[#393d4e] rounded-box z-1 w-52 p-2 shadow-sm"
-        >
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 gap-2">
           <li>
             <NavLink className={isActiveStyle} to="/">
-              <button className="text-2xl">Home</button>
+              Home
             </NavLink>
           </li>
           <li>
             <NavLink className={isActiveStyle} to="/newbooking">
-              <button className="text-2xl">New Booking</button>
+              New Booking
             </NavLink>
           </li>
           <li>
             <NavLink className={isActiveStyle} to="/about">
-              <button className="text-2xl">About</button>
+              About
             </NavLink>
           </li>
         </ul>
+      </div>
+      <div className="navbar-end">
+        <ThemeToggle />
       </div>
     </div>
   );

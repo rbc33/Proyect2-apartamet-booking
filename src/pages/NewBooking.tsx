@@ -19,12 +19,12 @@ const NewBooking = () => {
   const [guestName, setGuestName] = useState<string>("");
   const [hasChanged, setHasChanged] = useState<boolean>(false);
   useEffect(() => {
-      getAvailableApartments(dateRange?.from, dateRange?.to, guests).then(
-        (availableApartments) => {
-          setApartaments(availableApartments);
-        }
-      );
-      console.log(dateRange)
+    getAvailableApartments(dateRange?.from, dateRange?.to, guests).then(
+      (availableApartments) => {
+        setApartaments(availableApartments);
+      }
+    );
+    console.log(dateRange)
   }, [dateRange, guests, hasChanged]);
 
   const handleClick = async (apartment: Apartment) => {
@@ -74,7 +74,8 @@ const NewBooking = () => {
   };
 
   return (
-    <div>
+    <div className="container mx-auto px-4 pb-10">
+      <h1 className="text-3xl font-bold text-center mb-6">Book Your Stay</h1>
 
       <BookingForm
         dateRange={dateRange}
@@ -85,24 +86,24 @@ const NewBooking = () => {
         setGuestName={setGuestName}
       />
 
-        <p className="text-3xl mt-5">
-          {apartaments.length} Apartments available.
-        </p>
-        <br />
-        <div className="flex justify-center">
-      <div className="grid md:grid-cols-2 gap-20">
+      <div className="divider my-10"></div>
+
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">Available Apartments</h2>
+        <div className="badge badge-primary badge-lg">{apartaments.length} available</div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {apartaments.map((apartment) => (
           <AptCard key={apartment.id} apartment={apartment}>
             <button
-              className="mt-5 bg-blue-500 text-white px-4 py-2 rounded"
+              className="btn btn-primary w-full"
               onClick={() => handleClick(apartment)}
             >
-              {" "}
-              Book now{" "}
+              Book now
             </button>
           </AptCard>
         ))}
-      </div>
       </div>
     </div>
   );

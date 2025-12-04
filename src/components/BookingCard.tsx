@@ -7,25 +7,24 @@ interface BookingCardProps {
 
 const BookingCard = ({ booking, handleDelete }: BookingCardProps) => {
   return (
-    <div
-      key={booking.id}
-      className="flex flex-col items-start justify-self-start"
-    >
-      <div className=" card border-2 border-slate-600 p-3 mt-2  w-[300px]">
-        <p className="text-xl">Guest Name: {booking.guestName}</p>
-        <p className="text-xl">Guests: {booking.guests}</p>
-        <p className="text-xl">
-          From: {new Date(booking.in).toLocaleDateString("en-GB")}
-        </p>
-        <p className="text-xl">
-          To: {new Date(booking.out).toLocaleDateString("en-GB")}
-        </p>
-        <button
-          className="btn btn-secondary mt-2 justify-self-start"
-          onClick={() => handleDelete(booking.id)}
-        >
-          Delete
-        </button>
+    <div className="card bg-base-100 shadow-md border border-base-200">
+      <div className="card-body p-4">
+        <h3 className="card-title text-base">
+          {booking.guestName}
+          <div className="badge badge-sm badge-ghost">{booking.guests} guests</div>
+        </h3>
+        <div className="text-sm text-base-content/70">
+          <p>From: {new Date(booking.in).toLocaleDateString("en-GB")}</p>
+          <p>To: {new Date(booking.out).toLocaleDateString("en-GB")}</p>
+        </div>
+        <div className="card-actions justify-end mt-2">
+          <button
+            className="btn btn-error btn-xs btn-outline"
+            onClick={() => handleDelete(booking.id)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

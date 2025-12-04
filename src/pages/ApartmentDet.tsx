@@ -8,55 +8,53 @@ import DatePicker from '../components/DatePicker'
 import { type Apartment, type Booking } from '../types/types'
 import { BASE_URL } from './NewBooking'
 
-interface ApartmentDet extends Apartment{
-    bookings: Booking[]
+interface ApartmentDet extends Apartment {
+  bookings: Booking[]
 
 }
 const ApartmentDet = () => {
-    // TODO: crate context for dates instead new state and date pickers here
-    // const [checkIn, setCheckIn] = useState<Date | undefined>(new Date());
-    // const [checkOut, setCheckOut] = useState<Date | undefined>(undefined);
-   const {id} = useParams()
-   const [apartment, setApartment] = useState<ApartmentDet| undefined>()
-   const [dateRange, setDateRange] = useState<DateRange | undefined>();
+  const { id } = useParams()
+  const [apartment, setApartment] = useState<ApartmentDet | undefined>()
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [guests, setGuests] = useState<number>(1);
   const [guestName, setGuestName] = useState<string>("");
   const [hasChanged, setHasChanged] = useState<boolean>(false);
 
-   useEffect(() => {
-   const fetchApt = async() => {
+  useEffect(() => {
+    const fetchApt = async () => {
 
-       const res = await fetch(BASE_URL+`/apartments/${id}?_embed=bookings`)
-       const data = await res.json()
-       console.log(data)
-       setApartment(data)
-   }
+      const res = await fetch(BASE_URL + `/apartments/${id}?_embed=bookings`)
+      const data = await res.json()
+      console.log(data)
+      setApartment(data)
+    }
 
     fetchApt()
-    
-   }, [id, apartment?.bookings.length, hasChanged])
-   const handleDelete = async(bookingId:number) => {
+
+  }, [id, apartment?.bookings.length, hasChanged])
+  const handleDelete = async (bookingId: number) => {
     try {
-        const response = await fetch(BASE_URL+`/bookings/${bookingId}`, {
-            method: 'DELETE',
+      const response = await fetch(BASE_URL + `/bookings/${bookingId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setApartment((currentApartment) => {
+          if (!currentApartment) {
+            return undefined;
+          }
+          return {
+            ...currentApartment,
+            bookings: currentApartment.bookings.filter((booking) => booking.id !== bookingId),
+          };
         });
-        if (response.ok) {
-            setApartment((currentApartment) => {
-                if (!currentApartment) {
-                  return undefined;}
-                return {
-                  ...currentApartment,
-                  bookings: currentApartment.bookings.filter((booking) => booking.id !== bookingId),
-                };
-              });
-        } else {
-            console.error('Failed to delete booking');
-        }
+      } else {
+        console.error('Failed to delete booking');
+      }
     } catch (error) {
-        console.error('Error deleting booking:', error);
+      console.error('Error deleting booking:', error);
     }
-   }
-   const handleClick = async (apartment: Apartment) => {
+  }
+  const handleClick = async (apartment: Apartment) => {
     if (guestName === "") {
       toast.error("Please enter a guest name", { position: "top-right" });
       return;
@@ -101,76 +99,91 @@ const ApartmentDet = () => {
       }
     }
   };
-    return (
-        <>
-            {apartment && (
-                <div className='flex flex-col lg:flex-row justify-center items-center md:items-start gap-5'>
-                    <div>
-                       <AptCard apartment={apartment}/> 
-                    <div className="flex">
-                    <button className='btn btn-primary mt-5' onClick={() =>handleClick(apartment)}>Book now</button>
-                    <button className='btn btn-secondary mt-5 ml-5'><Link to={`/apartment/${apartment.id}/edit`}>Edit Apartment</Link></button>
-                    </div>
-                    </div>
+  return (
+    <div className="container mx-auto px-4 pb-10">
+      {apartment && (
+        <div className='flex flex-col lg:flex-row gap-8'>
+          <div className="flex-1">
+            <AptCard apartment={apartment} />
+            <div className="flex gap-4 mt-5">
+              <button className='btn btn-primary flex-1' onClick={() => handleClick(apartment)}>Book now</button>
+              <Link to={`/apartment/${apartment.id}/edit`} className='btn btn-secondary flex-1'>Edit Apartment</Link>
+            </div>
+          </div>
 
-                    
-                   <div className="card flex flex-col h-fit items-start gap-2 mt-5 border-2 border-slate-600 p-3">
-      <div className="flex flex-col items-start gap-2">
-      
-    <label htmlFor="guests">Guests:</label>
-      <input
-              className="input mx-2"
-
-        type="number"
-        id="guests"
-        value={guests}
-        name="guests"
-        min={1}
-        max={10}
-        onChange={(e) => {
-            if (Number(e.target.value) > apartment.capacity) {
-                toast.error(`Maximum guests for this apartment is ${apartment.capacity}`);
-            } else {
-          setGuests(Number(e.target.value))}}}
-      />
-      <label htmlFor="guestName">Guest Name:</label>
-      <input
-              className="input mx-2"
-
-        type="text"
-        id="guestName"
-        value={guestName}
-        name="guestName"
-        onChange={(e) => setGuestName(e.target.value)}
-      />
-      </div>
-          <div className="flex flex-col">
-
-      <label className="text-2xl">{(dateRange?.from)? "Selecet Check out:" : "Select Check in:"}</label>
-      <DatePicker
-      selectedDate={dateRange}
-      onDateChange={(dateRange) =>setDateRange(dateRange!)}
-      disabled={apartment.bookings.map(booking => ({ from: new Date(booking.in), to: new Date(booking.out)}))}
-      
-  />
-      <button className="btn btn-primary mt-5 text-white px-4 py-2 rounded justify-self-center" onClick={() => setDateRange(undefined)}> Clear dates </button>
-</div>
-      </div>
-      <div>
-                        {apartment.bookings && (
-                            <div>
-                                <h2 className="text-2xl mt-5">Bookings:</h2>
-                                {apartment.bookings.length === 0 && <p>No bookings for this apartment.</p>}
-                                {apartment.bookings.map((booking) => (
-                                   <BookingCard key={booking.id} booking={booking} handleDelete={handleDelete}/> 
-                                ))}
-                            </div>
-                        )}
-                    </div>
+          <div className="flex-1 card bg-base-100 shadow-xl border border-base-200 h-fit">
+            <div className="card-body">
+              <h2 className="card-title mb-4">Make a Booking</h2>
+              <div className="flex flex-col gap-4">
+                <div className="form-control">
+                  <label className="label" htmlFor="guests">
+                    <span className="label-text">Guests</span>
+                  </label>
+                  <input
+                    className="input input-bordered"
+                    type="number"
+                    id="guests"
+                    value={guests}
+                    name="guests"
+                    min={1}
+                    max={10}
+                    onChange={(e) => {
+                      if (Number(e.target.value) > apartment.capacity) {
+                        toast.error(`Maximum guests for this apartment is ${apartment.capacity}`);
+                      } else {
+                        setGuests(Number(e.target.value))
+                      }
+                    }}
+                  />
                 </div>
-            )}
-        </>
-    )
+                <div className="form-control">
+                  <label className="label" htmlFor="guestName">
+                    <span className="label-text">Guest Name</span>
+                  </label>
+                  <input
+                    className="input input-bordered"
+                    type="text"
+                    id="guestName"
+                    value={guestName}
+                    name="guestName"
+                    onChange={(e) => setGuestName(e.target.value)}
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">{(dateRange?.from) ? "Select Check out:" : "Select Check in:"}</span>
+                  </label>
+                  <div className="border rounded-lg p-2 flex justify-center bg-base-200/50">
+                    <DatePicker
+                      selectedDate={dateRange}
+                      onDateChange={(dateRange) => setDateRange(dateRange!)}
+                      disabled={apartment.bookings.map(booking => ({ from: new Date(booking.in), to: new Date(booking.out) }))}
+                    />
+                  </div>
+                </div>
+                <button className="btn btn-outline btn-sm mt-2" onClick={() => setDateRange(undefined)}> Clear dates </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {apartment && apartment.bookings && (
+        <div className="mt-10">
+          <h2 className="text-2xl font-bold mb-5">Current Bookings</h2>
+          {apartment.bookings.length === 0 ? (
+            <div className="alert alert-info">No bookings for this apartment.</div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {apartment.bookings.map((booking) => (
+                <BookingCard key={booking.id} booking={booking} handleDelete={handleDelete} />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default ApartmentDet
