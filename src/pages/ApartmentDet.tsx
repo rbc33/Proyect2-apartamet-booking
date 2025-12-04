@@ -115,36 +115,36 @@ const ApartmentDet = () => {
             <div className="card-body">
               <h2 className="card-title mb-4">Make a Booking</h2>
               <div className="flex flex-col gap-4">
-               <div className="form-control w-full">
-            <label className="label" htmlFor="guests">
-              <span className="label-text font-semibold">Guests</span>
-            </label>
-            <input
-              className="input input-bordered w-full"
-              type="number"
-              id="guests"
-              value={guests}
-              name="guests"
-              min={1}
-              max={10}
-              onChange={(e) => setGuests(Number(e.target.value))}
-            />
-          </div>
+                <div className="form-control w-full">
+                  <label className="label" htmlFor="guests">
+                    <span className="label-text font-semibold">Guests</span>
+                  </label>
+                  <input
+                    className="input input-bordered w-full"
+                    type="number"
+                    id="guests"
+                    value={guests}
+                    name="guests"
+                    min={1}
+                    max={10}
+                    onChange={(e) => setGuests(Number(e.target.value))}
+                  />
+                </div>
 
-          <div className="form-control w-full">
-            <label className="label" htmlFor="guestName">
-              <span className="label-text font-semibold">Guest Name</span>
-            </label>
-            <input
-              className="input input-bordered w-full"
-              type="text"
-              id="guestName"
-              value={guestName}
-              name="guestName"
-              placeholder="Enter your name"
-              onChange={(e) => setGuestName(e.target.value)}
-            />
-          </div>
+                <div className="form-control w-full">
+                  <label className="label" htmlFor="guestName">
+                    <span className="label-text font-semibold">Guest Name</span>
+                  </label>
+                  <input
+                    className="input input-bordered w-full"
+                    type="text"
+                    id="guestName"
+                    value={guestName}
+                    name="guestName"
+                    placeholder="Enter your name"
+                    onChange={(e) => setGuestName(e.target.value)}
+                  />
+                </div>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text font-semibold">{(dateRange?.from) ? "Select Check out" : "Select Check in"}</span>
@@ -157,7 +157,7 @@ const ApartmentDet = () => {
                     />
                   </div>
                 </div>
-                <button className="btn btn-outline btn-sm mt-2 border-slate-600" onClick={() => setDateRange(undefined)}> Clear dates </button>
+                <button className="btn btn-error btn-sm text-white mt-2" onClick={() => setDateRange(undefined)}> Clear dates </button>
               </div>
             </div>
           </div>

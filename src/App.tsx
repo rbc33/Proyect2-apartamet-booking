@@ -1,5 +1,4 @@
 import { Toaster } from 'react-hot-toast'
-import './App.css'
 import AppRouter from './appRouter/AppRouter'
 import NavBar from './components/NavBar'
 

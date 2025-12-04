@@ -10,7 +10,7 @@ interface AptCardProps {
 const AptCard = ({ apartment, children }: AptCardProps) => {
   const { id, name, description, size, capacity, pricePerDay, image } = apartment
   return (
-    <div className="card border-2 border-slate-600 bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+    <div className="card border-2 border-slate-600 bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-lg">
       <figure>
         <Link to={`/apartment/${id}`} className="w-full h-64 overflow-hidden">
           <img src={image} alt={name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />

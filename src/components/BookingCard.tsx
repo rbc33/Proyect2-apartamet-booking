@@ -7,7 +7,7 @@ interface BookingCardProps {
 
 const BookingCard = ({ booking, handleDelete }: BookingCardProps) => {
   return (
-    <div className="card bg-base-100 shadow-md border border-slate-600">
+    <div className="card bg-base-100 shadow-md border border-slate-600 rounded-lg">
       <div className="card-body p-4">
         <h3 className="card-title text-base">
           {booking.guestName}

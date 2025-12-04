@@ -40,13 +40,13 @@ const NavBar = () => {
       <div className="navbar-end">
         <ThemeToggle />
       </div>
-      <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+      <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden focus:bg-slate-300 dark:focus:bg-slate-600">
             <GiHamburgerMenu className="text-xl" />
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow bg-slate-300 dark:bg-slate-700 rounded-box w-52"
           >
             <li>
               <NavLink to="/"><p className="text-xl">Home</p></NavLink>
