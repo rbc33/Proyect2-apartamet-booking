@@ -75,7 +75,7 @@ const NewBooking = () => {
 
   return (
     <div className="container mx-auto px-4 pb-10">
-      <h1 className="text-3xl font-bold text-center mb-6">Book Your Stay</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 text-primary">Book Your Stay</h1>
 
       <BookingForm
         dateRange={dateRange}
@@ -89,7 +89,7 @@ const NewBooking = () => {
       <div className="divider my-10"></div>
 
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Available Apartments</h2>
+        <h2 className="text-2xl font-bold text-primary">Available Apartments</h2>
         <div className="badge badge-primary badge-lg">{apartaments.length} available</div>
       </div>
 
