@@ -9,75 +9,8 @@ const AboutPage = () => {
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-primary mb-4">Apartment Booking</h1>
           <p className="text-xl text-base-content/70">
-            A modern platform to book apartments easily and securely
+            Technical Overview
           </p>
-        </div>
-
-        {/* About Section */}
-        <div className="card bg-base-200 shadow-lg mb-8">
-          <div className="card-body">
-            <h2 className="card-title text-2xl text-primary mb-4">What is Apartment Booking?</h2>
-            <p className="text-base-content/80 leading-relaxed mb-4">
-              Apartment Booking is a comprehensive apartment reservation platform designed to provide a smooth and secure user experience. 
-              Whether you're looking for a place for a short stay or a long-term residence, our application makes it easy to search, compare, 
-              and book apartments.
-            </p>
-            <p className="text-base-content/80 leading-relaxed">
-              With an intuitive interface and advanced features, you can explore different properties, view complete details, check 
-              real-time availability, and make reservations in just a few clicks.
-            </p>
-          </div>
-        </div>
-
-        {/* Features Section */}
-        <div className="card bg-base-200 shadow-lg mb-8">
-          <div className="card-body">
-            <h2 className="card-title text-2xl text-primary mb-6">Key Features</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <div className="text-primary mt-1">✓</div>
-                <div>
-                  <h3 className="font-semibold">Advanced Search</h3>
-                  <p className="text-sm text-base-content/70">Find apartments by location, date, and number of guests</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-primary mt-1">✓</div>
-                <div>
-                  <h3 className="font-semibold">Real-Time Availability</h3>
-                  <p className="text-sm text-base-content/70">Instantly check which apartments are available</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-primary mt-1">✓</div>
-                <div>
-                  <h3 className="font-semibold">Secure Bookings</h3>
-                  <p className="text-sm text-base-content/70">Reliable booking system with instant confirmation</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-primary mt-1">✓</div>
-                <div>
-                  <h3 className="font-semibold">Detailed Information</h3>
-                  <p className="text-sm text-base-content/70">High-quality images, complete descriptions, and reviews</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-primary mt-1">✓</div>
-                <div>
-                  <h3 className="font-semibold">Booking Management</h3>
-                  <p className="text-sm text-base-content/70">View and manage all your reservations in one place</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-primary mt-1">✓</div>
-                <div>
-                  <h3 className="font-semibold">Customizable Themes</h3>
-                  <p className="text-sm text-base-content/70">Switch between different themes to personalize your experience</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Tech Stack Section */}
@@ -156,23 +89,11 @@ const AboutPage = () => {
               <div>
                 <h3 className="font-semibold text-lg mb-2">Frontend (Client)</h3>
                 <p className="text-base-content/80">
-                  A modern React application built with TypeScript, Vite, and Tailwind CSS. The interface is fully responsive 
+                  A modern React application built with TypeScript, Vite, and Tailwind CSS. The interface is fully responsive
                   and accessible, with customizable themes powered by DaisyUI.
                 </p>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Backend (API)</h3>
-                <p className="text-base-content/80">
-                  RESTful API that handles business logic, apartment management, bookings, and availability. 
-                  Communicates with the database to ensure real-time consistency.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Database</h3>
-                <p className="text-base-content/80">
-                  Robust storage system for managing apartments, reservations, users, and availability information.
-                </p>
-              </div>
+             
             </div>
           </div>
         </div>
