@@ -6,8 +6,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const NavBar = () => {
   const isActiveStyle = ({ isActive }: { isActive: boolean }) =>
     isActive
-      ? "btn btn-ghost text-primary text-2xl"
-      : "btn btn-ghost text-2xl";
+      ? "btn btn-ghost text-slate-500 dark:text-slate-500 text-2xl"
+      : "btn btn-ghost text-2xl hover:text-slate-500 hover:dark:text-slate-500";
 
   return (
     <div className="navbar bg-base-100 shadow-md mb-5 rounded-box">
@@ -52,7 +52,7 @@ const NavBar = () => {
               <NavLink to="/"><p className="text-xl">Home</p></NavLink>
             </li>
             <li>
-              <NavLink to="/newbooking"><p className="text-xl">New Booking</p></NavLink>
+              <NavLink to="/newbooking"><p className="text-xl">New</p></NavLink>
             </li>
             <li>
               <NavLink to="/about"><p className="text-xl">About</p></NavLink>
