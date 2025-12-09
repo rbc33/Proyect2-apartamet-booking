@@ -20,8 +20,8 @@ const HomePage = () => {
       <div className="hero bg-base-200 rounded-box mb-10 py-10">
         <div className="hero-content text-center">
           <div className="max-w-md">
-            <h1 className="text-5xl font-bold text-primary">Find Your Perfect Stay</h1>
-            <p className="py-6">Discover comfortable and affordable apartments for your next trip.</p>
+            <h1 className="text-5xl font-bold whitespace-nowrap text-primary">Find Your Perfect Stay</h1>
+            <p className="py-6 whitespace-nowrap">Discover comfortable and affordable apartments for your next trip.</p>
           </div>
         </div>
       </div>

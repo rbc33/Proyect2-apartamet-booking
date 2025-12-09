@@ -136,7 +136,7 @@ async function getAvailableApartments(
         return checkAvailability(checkInDate, checkOutDate, apartmentBookings);
       })
       // Filter by capacity
-      .filter((apartment: Apartment) => apartment.capacity >= guests);
+      .filter((apartment: Apartment) => apartment.capacity! >= guests);
 
     return availableApartments as Apartment[];
   } catch (error) {

@@ -31,6 +31,11 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink className={isActiveStyle} to="/newapartment">
+              New Apartment
+            </NavLink>
+          </li>
+          <li>
             <NavLink className={isActiveStyle} to="/about">
               About
             </NavLink>

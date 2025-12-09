@@ -1,11 +1,11 @@
 export interface Apartment {
-  id: number;
-  name: string;
-  image: string;
-  size: number;
-  pricePerDay: number;
-  description: string;
-  capacity: number;
+  id?: number;
+  name?: string;
+  image?: string;
+  size?: number;
+  pricePerDay?: number;
+  description?: string;
+  capacity?: number;
 }
 
 export  interface Booking {

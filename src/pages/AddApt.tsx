@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AptForm from "../components/AptForm";
-import { type Apartment } from "../types/types";
 import { BASE_URL } from "./NewBooking";
 
-const EditApartment = () => {
-  const { id } = useParams();
+const AddApt = () => {
   const navigate = useNavigate();
-  const [apartment, setApartment] = useState<Apartment | undefined>();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [capacity, setCapacity] = useState(0);
@@ -15,23 +12,8 @@ const EditApartment = () => {
   const [size, setSize] = useState(0);
   const [image, setImage] = useState("");
 
-  useEffect(() => {
-    const fetchApt = async () => {
-      const response = await fetch(BASE_URL + `/apartments/${id}`);
-      const data = await response.json();
-      setApartment(data);
-      setName(data.name);
-      setDescription(data.description);
-      setCapacity(data.capacity);
-      setPricePerDay(data.pricePerDay);
-      setSize(data.size);
-      setImage(data.image);
-    };
-    fetchApt();
-  }, [id]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!apartment) return;
     if (name === "") {
       alert("Please enter a name");
       return;
@@ -56,8 +38,7 @@ const EditApartment = () => {
       alert("Please enter an image");
       return;
     }
-    const updatedApartment = {
-      ...apartment,
+    const newApartment = {
       name,
       description,
       capacity,
@@ -66,34 +47,33 @@ const EditApartment = () => {
       image,
     };
     try {
-      const response = await fetch(BASE_URL + `/apartments/${apartment.id}`, {
-        method: "PUT",
+      const response = await fetch(BASE_URL + `/apartments`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedApartment),
+        body: JSON.stringify(newApartment),
       });
       if (response.ok) {
-        navigate(`/apartment/${apartment.id}`);
+        navigate(`/`);
       } else {
-        console.error("Failed to update apartment");
+        console.error("Failed to create apartment");
       }
     } catch (error) {
-      console.error("Error updating apartment:", error);
+      console.error("Error creating apartment:", error);
     }
   };
   return (
     <div className="container mx-auto px-4 pb-10">
-      <h1 className="text-3xl font-bold text-center mb-8">Edit Apartment</h1>
-      {apartment && (
+      <h1 className="text-3xl font-bold text-center mb-8">Add Apartment</h1>
+      
         <AptForm
-          id={apartment.id}
-          name={apartment.name}
-          description={apartment.description}
-          capacity={apartment.capacity}
-          pricePerDay={apartment.pricePerDay}
-          size={apartment.size}
-          image={apartment.image}
+          name={name}
+          description={description}
+          capacity={capacity}
+          pricePerDay={pricePerDay}
+          size={size}
+          image={image}
           setName={setName}
           setDescription={setDescription}
           setCapacity={setCapacity}
@@ -102,9 +82,8 @@ const EditApartment = () => {
           setImage={setImage}
           handleSubmit={handleSubmit}
         />
-      )}
     </div>
   );
 };
 
-export default EditApartment;
+export default AddApt

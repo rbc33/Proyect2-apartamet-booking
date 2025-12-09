@@ -5,6 +5,7 @@ import EditApartment from '../pages/EditApartment'
 import HomePage from '../pages/HomePage'
 import ErrorPage from '../pages/ErrorPage'
 import AboutPage from '../pages/AboutPage'
+import AddApt from '../pages/AddApt'
 
 const AppRouter = () => {
   return (
@@ -12,6 +13,7 @@ const AppRouter = () => {
     <Routes>
         <Route path="/" element={<HomePage/>}></Route>
         <Route path="/newbooking" element={<NewBooking/>}></Route>
+        <Route path="/newapartment" element={<AddApt/>}></Route>
         <Route path="/apartment/:id" element={<ApartmentDet/>}></Route>
         <Route path="/apartment/:id/edit" element={<EditApartment/>}></Route>
         <Route path="/about" element={<AboutPage/>}></Route>
