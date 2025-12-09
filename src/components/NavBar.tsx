@@ -11,7 +11,7 @@ const NavBar = () => {
 
   return (
     <div className="navbar bg-base-100 shadow-md mb-5 rounded-box">
-      <div className="navbar-start">
+      <div className="navbar-start mr-5">
         
         <Link to="/" className="btn btn-ghost gap-2">
           <img src={logo} alt="Logo" className="w-8 h-8 rounded-lg" />
@@ -27,7 +27,7 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink className={isActiveStyle} to="/newbooking">
-              New Booking
+              Book
             </NavLink>
           </li>
           <li>
@@ -57,7 +57,10 @@ const NavBar = () => {
               <NavLink to="/"><p className="text-xl">Home</p></NavLink>
             </li>
             <li>
-              <NavLink to="/newbooking"><p className="text-xl">New</p></NavLink>
+              <NavLink to="/newbooking"><p className="text-xl">Book</p></NavLink>
+            </li>
+            <li>
+              <NavLink to="/newapartment"><p className="text-xl">New Apartment</p></NavLink>
             </li>
             <li>
               <NavLink to="/about"><p className="text-xl">About</p></NavLink>

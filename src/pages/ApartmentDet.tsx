@@ -155,7 +155,7 @@ const ApartmentDet = () => {
                   </div>
                 </div>
                 <button
-                  className="btn btn-error text-black dark:text-white mt-4"
+                  className="btn bg-[#1d272e] text-black dark:text-white mt-4"
                   onClick={() => setDateRange(undefined)}
                   disabled={!dateRange}
                 >Clear dates</button>

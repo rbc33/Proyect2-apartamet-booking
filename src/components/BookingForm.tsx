@@ -55,7 +55,7 @@ const BookingForm = ({
           </div>
 
           <button
-            className="btn btn-error text-white mt-auto hidden md:flex"
+            className="btn bg-[#1d272e] text-white mt-auto hidden md:flex"
             onClick={() => setDateRange(undefined)}
             disabled={!dateRange}
           >
@@ -76,7 +76,7 @@ const BookingForm = ({
             />
           </div>
           <button
-            className="btn btn-error text-black dark:text-white md:hidden mt-4"
+            className="btn bg-[#1d272e] text-black dark:text-white md:hidden mt-4"
             onClick={() => setDateRange(undefined)}
             disabled={!dateRange}
           >

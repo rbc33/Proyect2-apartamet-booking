@@ -51,32 +51,6 @@ const AboutPage = () => {
                 <p className="text-sm text-base-content/70">UI Components</p>
               </div>
 
-              <div className="flex flex-col items-center text-center">
-                <div className="text-4xl mb-2">📅</div>
-                <h3 className="font-semibold">React Day Picker</h3>
-                <p className="text-sm text-base-content/70">Date selector</p>
-              </div>
-
-              {/* Routing */}
-              <div className="flex flex-col items-center text-center">
-                <div className="text-4xl mb-2">🛣️</div>
-                <h3 className="font-semibold">React Router 7</h3>
-                <p className="text-sm text-base-content/70">SPA routing</p>
-              </div>
-
-              {/* Notifications */}
-              <div className="flex flex-col items-center text-center">
-                <div className="text-4xl mb-2">🔔</div>
-                <h3 className="font-semibold">React Hot Toast</h3>
-                <p className="text-sm text-base-content/70">Notifications</p>
-              </div>
-
-              {/* Icons */}
-              <div className="flex flex-col items-center text-center">
-                <div className="text-4xl mb-2">✨</div>
-                <h3 className="font-semibold">React Icons</h3>
-                <p className="text-sm text-base-content/70">Icon library</p>
-              </div>
             </div>
           </div>
         </div>
@@ -87,9 +61,8 @@ const AboutPage = () => {
             <h2 className="card-title text-2xl text-primary mb-4">Architecture</h2>
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-lg mb-2">Frontend (Client)</h3>
-                <p className="text-base-content/80">
-                  A modern React application built with TypeScript, Vite, and Tailwind CSS. The interface is fully responsive
+                <p className="text-base-content/80 text-xl">
+                  A SPA React application built with TypeScript, Vite, and Tailwind CSS. The interface is fully responsive
                   and accessible, with customizable themes powered by DaisyUI.
                 </p>
               </div>
