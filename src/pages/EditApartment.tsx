@@ -8,12 +8,12 @@ const EditApartment = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [apartment, setApartment] = useState<Apartment | undefined>();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [capacity, setCapacity] = useState(0);
-  const [pricePerDay, setPricePerDay] = useState(0);
-  const [size, setSize] = useState(0);
-  const [image, setImage] = useState("");
+  const [name, setName] = useState(apartment?.name);
+  const [description, setDescription] = useState(apartment?.description);
+  const [capacity, setCapacity] = useState(apartment?.capacity);
+  const [pricePerDay, setPricePerDay] = useState(apartment?.pricePerDay);
+  const [size, setSize] = useState(apartment?.size);
+  const [image, setImage] = useState(apartment?.image);
 
   useEffect(() => {
     const fetchApt = async () => {
@@ -88,12 +88,12 @@ const EditApartment = () => {
       {apartment && (
         <AptForm
           id={apartment.id}
-          name={apartment.name}
-          description={apartment.description}
-          capacity={apartment.capacity}
-          pricePerDay={apartment.pricePerDay}
-          size={apartment.size}
-          image={apartment.image}
+          name={name}
+          description={description}
+          capacity={capacity}
+          pricePerDay={pricePerDay}
+          size={size}
+          image={image}
           setName={setName}
           setDescription={setDescription}
           setCapacity={setCapacity}
